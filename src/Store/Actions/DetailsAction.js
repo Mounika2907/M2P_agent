@@ -156,6 +156,7 @@ export const SubmitQuestionsAction = (id, status, time) => {
             remarks: "Banker-Status",
             userid: sessionStorage.getItem("userid")
         }
+        console.log(body, 'req')
         Axios.post(URL, parsingData(body))
             .then((res) => {
                 var resp = extractData(res.data);

@@ -18,49 +18,21 @@ const FaceMatchCmp = (props) => {
 
         }
     }
-    
-    //         // const context = canvas.getContext('2d');
-    //         // context.drawImage(props.pic.data.mode, 0, 0, imgdata.widht, imgdata.height);
-    //         // let img = canvas.toDataURL('image/png');
-    //         // console.log(img, 'asdfkk')
-    //         // props.canvasImage(img);
-    //         // let imgPath = img.split(',')[1]
-    //         // props.livecheck(imgPath);
-    //     }
+        //     }
     // }
     // if (state) {
     //     const canvas = document.getElementById("canvas");
     //     if (canvas) {
     //         const context = canvas.getContext('2d');
     //         context.drawImage(state, 0, 0, 1280, 720);
-    //         // let img = canvas.toDataURL('image/png', 1.0);
-    //         // props.canvasImage(img);
-    //         // let imgPath = img.split(',')[1]
-    //         // props.livecheck(imgPath);
     //     }
     // }
 
     // const capturePhoto = () => {
     //     const video = document.querySelector(".video-image-capture #live-vd");
     //     const canvas = document.getElementById("canvas");
-
-    //     // setState(video)
-    //     // const canvas = document.getElementById("canvas");
-    //     // var image = new Image();
-    //     // image.src = canvas.toDataURL("image/png");
-    //     // var image1 = image.src.split(',')[1];
-    //     // setStateImage(image1)
-    //     // const model = {
-    //     //     mode: video,
-    //     //     img: image1
-    //     // }
-    //     // this.props.CaptureAction(model);
     //     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     //     let image_data_url = canvas.toDataURL('image/jpeg');
-
-    //     // data url of the image
-    //     console.log(image_data_url, 'from click');
-
     // }
 
     return (

@@ -10,8 +10,8 @@ const VideoChatCmp = (props) => {
                     CUSTOMER
                 </h2>
                 <div className="customer-video">
-                    {/* <video src="" poster="images/live.png" width="100%" height="100%"></video> */}
-                    <img src="images/live.png" className="w-100 h-100" alt="no img" />
+                    {/* <video src="" poster="images/sample_icon.png" width="100%" height="100%"></video> */}
+                    <img src="images/sample_icon.png" className="w-100 h-100" alt="no img" />
                 </div>
                 <div className="customer-video live-banker">
                     {/* <video src=""></video> */}

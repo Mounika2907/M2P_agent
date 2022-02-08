@@ -2,25 +2,24 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux'
 import { connect } from 'react-redux';
 import { UserListAction, JoinStatusAction, JoinVideoAction } from '../../Store/Actions/DetailsAction'
-import { Link } from 'react-router-dom';
 const $ = window.$;
 
 class UserList extends Component {
     state = {
         intervalId: undefined,
-        
+
     }
     componentDidMount() {
         // window.location.reload(true);
         const userid = sessionStorage.getItem("userid");
         sessionStorage.removeItem("vcipid");
         sessionStorage.removeItem("videoconfsessionid");
-        const $this =  this.props.history;        
+        const $this = this.props.history;
         if (userid) {
             this.props.UserListAction($this);
             let intervalId = setInterval(() => {
                 this.props.UserListAction($this);
-            }, 7000);
+            }, 2000);
             this.setState({ intervalId: intervalId });
         }
 
@@ -47,11 +46,12 @@ class UserList extends Component {
     }
     timedisplay = (time) => {
         const hms = time;
-        const [hours, minutes, seconds] = hms.split(':');
-        const totalSeconds = (hours)  + ":" +(minutes) ;
+        // in arrary we can use seconds also 
+        const [hours, minutes] = hms.split(':');
+        const totalSeconds = (hours) + ":" + (minutes);
         return totalSeconds;
     }
-   
+
 
     // join = () => {
     //     $('#join').modal('hide');
@@ -61,10 +61,10 @@ class UserList extends Component {
 
     joinCheck = (vcipid, videoconfsessionid) => {
         const $this = this.props.history;
-        const model ={
+        const model = {
             id: vcipid,
             videoconfsessionid: videoconfsessionid
-        }       
+        }
         this.props.JoinVideoAction($this, model);
     }
 
@@ -77,45 +77,40 @@ class UserList extends Component {
                 <div className="container">
                     <div className="row justify-content-center mt-4">
                         <div className="col-md-10">
-                            {console.log(this.props.infoRdr)}
                             {this.props.InfoRdr.userList ? (
                                 <div className="my-3 p-3 bg-white rounded shadow-sm">
                                     <h6 className="border-bottom border-gray pb-2 mb-0">
                                         VCIP LIST
-                                    <span className="float-right">
+                                        <span className="float-right">
                                             {this.props.InfoRdr.userList?.vciplistcount}
                                         </span>
                                     </h6>
-                                   
-                                    {this.props.InfoRdr.userList?.vciplist?.map((res, i) => (res?.isscheduled === "0"
+                                    {/* old code below */}
+                                    {/* {this.props.InfoRdr.userList?.vciplist?.map((res, i) => (res?.isscheduled === "0"
                                         ? <div className="media text-muted pt-3" key={i}>
                                             <svg className="bd-placeholder-img mr-2 rounded" width={32} height={32} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                                             <div className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                                                 <div className="d-flex justify-content-between align-items-center w-100">
-                                                        <div>
+                                                    <div>
                                                         <strong className="text-gray-dark">{res.vcipid}</strong>
                                                         <br></br>
-                                                        <span className="d-block" style ={{marginTop:"5px"}}>{res.lastsessionon}</span>
-                                                        </div>
-                                                    
+                                                        <span className="d-block" style={{ marginTop: "2px" }}>VCIP ID Generated on: {res.createdon}</span>
+                                                        <span className="d-block" style={{ marginTop: "2px" }}>VCIP ID Video call requested on: {res.lastsessionon}</span>
+                                                    </div>
+
                                                     {res?.joinstatus === "1" ? (
-                                                       <div style ={{textAlign: "end",}}>
-                                                        <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)} >Join</button>
-                                                        <p className="py-2">Customer is waiting since <strong style ={{color:"red"}}>{this.timedisplay(res.wtime)} </strong> mins</p>
-                                                       </div>
-                                                       
+                                                        <div style={{ textAlign: "end", }}>
+                                                            <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)} >Join</button>
+                                                            <p className="py-2">Customer is waiting since <strong style={{ color: "red" }}>{this.timedisplay(res.wtime)} </strong> (HH:MM:SS)</p>
+                                                        </div>
+
                                                     ) : (
-                                                            "Completed"
-                                                        )}
+                                                        "Completed"
+                                                    )}
                                                 </div>
-                                                {/* <span className="d-block">{res.lastsessionon}</span> */}
                                             </div>
                                         </div>
-                                        : <div className={`media text-muted pt-3 scheduled ${res?.joinstatus === "1" ? 'scheduled1' : ''}`} key={i}>
-                                            {/* <svg className="bd-placeholder-img mr-2 rounded-circle" width={32} height={32} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
-                                                <rect width="100%" height="100%" fill="#007bff" />
-                                                <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                                            </svg> */}
+                                        : <div className={`media text-muted pt-3 scheduled ${res?.joinstatus === "1" ? '' : ''}`} key={i}>
                                             <div className="schedule-cal">
                                                 <i className="far fa-calendar-alt"></i>
                                             </div>
@@ -123,17 +118,57 @@ class UserList extends Component {
                                                 <div className="d-flex justify-content-between align-items-center w-100">
                                                     <strong className="text-gray-dark">
                                                         {res.vcipid}
-                                                        <span className="small pl-1">Scheduled Date : {res.sdate + ", " + res.stime}</span>
                                                     </strong>
                                                     {res?.joinstatus === "1"
                                                         ? <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
                                                         : <button className="btn btn-sm btn-danger">Scheduled</button>
                                                     }
                                                 </div>
-                                                <span className="d-block schedule-created">{res.lastsessionon}</span>
+                                                <span className="d-block" style={{ marginTop: "2px" }}>VCIP ID Generated on: {res.createdon}</span>
+                                                <span className="d-block" style={{ marginTop: "2px" }}>VCIP ID Video call requested on: {res.lastsessionon}</span>
                                             </div>
                                         </div>
-                                    ))}
+                                    ))} */}
+
+
+
+
+                                    {this.props.InfoRdr.userList?.vciplist?.map((res, i) =>
+                                        <div className="media text-muted pt-3" key={i}>
+                                            {/* <i className="far fa-calendar-alt"></i> */}
+                                            <svg className="bd-placeholder-img mr-2 rounded" width={32} height={32} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                            {/* <div className="schedule-cal">
+                                                <i className="far fa-calendar-alt">
+                                                </i>
+                                            </div> */}
+                                            <div className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                                <div className="d-flex justify-content-between align-items-center w-100">
+                                                    <div>
+                                                        <strong className="text-gray-dark">{res.vcipid}</strong>
+                                                        <br></br>
+                                                        <span className="d-block" style={{ marginTop: "2px" }}>VCIP ID Generated on: {res.createdon}</span>
+                                                        <span className="d-block" style={{ marginTop: "2px" }}>VCIP ID Video call requested on: {res.lastsessionon}</span>
+                                                    </div>
+
+                                                    {res?.joinstatus === "1" ? (
+                                                        <div style={{ textAlign: "end", }}>
+                                                            <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)} >Join</button>
+                                                            <p className="py-2">Customer is waiting since <strong style={{ color: "red" }}>{this.timedisplay(res.wtime)} </strong> (HH:MM:SS)</p>
+                                                        </div>
+
+                                                    ) : (
+                                                        "Completed"
+                                                    )}
+                                                </div>
+                                                {/* <span className="d-block">{res.lastsessionon}</span> */}
+                                            </div>
+                                        </div>
+
+                                    )}
+
+
+
+
                                 </div>
                             ) : (null)}
                         </div>
@@ -154,7 +189,7 @@ class UserList extends Component {
                                     {/* <img src="../images/success.svg" alt="no img" /> */}
                                     <h1 className="modal-data-title">
                                         Ready to take Video conferance with
-                                         {this.props.InfoRdr.joinStatus?.vcipid}
+                                        {this.props.InfoRdr.joinStatus?.vcipid}
                                     </h1>
 
                                     <div className="row justify-content-center">

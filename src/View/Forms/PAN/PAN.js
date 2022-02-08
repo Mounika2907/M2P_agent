@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 // import { toast } from 'react-toastify';
 import Aux from '../../../hoc/Aux';
-import Attachment from '../../../Component/Forms/Attachment/Attachment';
 import AttachmentInfo from '../../../Component/Forms/Attachment/AttachmentInfo';
 import { connect } from 'react-redux';
 import { PanAction } from '../../../Store/Actions/UsersActions/UserActions';

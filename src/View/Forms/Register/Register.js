@@ -58,14 +58,14 @@ class Register extends Component {
     HandleSubmit = (event) => {
         event.preventDefault();
         if (this.state.email && this.state.name) {
-            const body = {
-                "orgname": this.state.name,
-                "city": this.state.district,
-                "state": this.state.state,
-                "pincode": this.state.pincode,
-                "email": this.state.email,
-                "mobile": this.state.phone
-            }
+            // const body = {
+            //     "orgname": this.state.name,
+            //     "city": this.state.district,
+            //     "state": this.state.state,
+            //     "pincode": this.state.pincode,
+            //     "email": this.state.email,
+            //     "mobile": this.state.phone
+            // }
             toast.success("Sucess");
             this.props.history.push('/');
         } else {
