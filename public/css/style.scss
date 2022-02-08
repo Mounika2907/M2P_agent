@@ -739,12 +739,12 @@ main {
                     }
 
                     &.active {
-                        background-color: #09aae1;
+                        background-color: #28a745 !important;
                         color: #ffffff;
                     }
 
                     &.reject {
-                        background-color: #09aae1 !important;
+                        background-color: #dc3545!important;
                         color: #ffffff;
                     }
 
@@ -1893,7 +1893,7 @@ input[type="checkbox"] {
         align-items: center;
         justify-content: center;
         // color: #ffffff;
-        background-color: #fff;
+        background-color: rgb(170, 33, 33);
         font-size: 18px;
         margin-right: 10px;
     }

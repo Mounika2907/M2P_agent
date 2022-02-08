@@ -56,14 +56,6 @@ class ChatApp extends Component {
         // $('#btn_record_start').click();
         // window.addEventListener('beforeunload', this.onbeforeunload);
 
-
-
-
-
-
-
-
-
         this.joinSession();
         let intervalId1 = setInterval(() => {
             const endCall = this.props.CaptureRdr.endVideoCallByCustomer;
@@ -77,7 +69,7 @@ class ChatApp extends Component {
         this.setState({ intervalId1: intervalId1 });
 
         this.intervalVideoTime = setInterval(() => this.startVideoTime(),
-            1000);
+            2000);
 
     }
 
@@ -631,7 +623,7 @@ class ChatApp extends Component {
                                             ${qtn.status === '0' ? '' : qtn.status === '-1' ? 'reject' : 'active'} 
                                             ${parseInt(this.props.InfoRdr.info?.totalquestions) > 10 ? 'btn-qtn-size' : ''}`}>
                                                 {qtn.status === "0" ? qtn.sno : qtn.status === "-1"
-                                                    ? <i class="fas fa-times"></i>
+                                                    ? <i className="fas fa-times"></i>
                                                     : <i className="fas fa-check" />}
                                             </button>
                                         </li>

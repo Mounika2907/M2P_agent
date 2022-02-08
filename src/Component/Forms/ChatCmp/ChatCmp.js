@@ -18,7 +18,7 @@ const ChatCmp = (props) => {
                                             <p className="chat-msg">{res.data}</p>
                                             <p className="chat-time text-right">{props.time(res.from.creationTime)}</p>
                                         </div>
-                                        <img src="../images/live.png" className="ml-2 chat-img border" alt="no img" />
+                                        <img src="../images/sample_icon.png" className="ml-2 chat-img border" alt="no img" />
                                     </div>
                                 </div>
                             </div>) :

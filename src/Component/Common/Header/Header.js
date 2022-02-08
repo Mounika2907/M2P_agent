@@ -133,7 +133,7 @@ class Header extends Component {
                             <div className="form-inline">
                                 <div className="media banker-info">
                                     <div className="align-self-center mr-2 banker-img">
-                                        <img src="../images/live.png" alt="no img" />
+                                        <img src="../images/sample_icon.png" alt="no img" />
                                     </div>
                                     <div className="media-body">
                                         <p className="banker-name">
